@@ -1,0 +1,122 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-material/paper-material.html">
+<link rel="import" href="bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+
+<dom-module id="video-game">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      h1{
+        font-weight: 200;
+      }
+      h1 > span {
+        font-weight: 500;
+        font-style: italic;
+        border-bottom: solid rgb(150,150,150) 1px;
+      }
+      paper-material{
+        margin: 10px 0 0 0;
+        display: inline-flex;
+      }
+      span {
+        font-weight: 400;
+      }
+      paper-material > p {
+        margin: 10px;
+        font-family: Roboto,sans-serif;
+      }
+      paper-input.search {
+        display: inline-block;
+      }
+      paper-button.search {
+        color: #4285f4;
+        vertical-align: super;
+      }
+      .game-image{
+        display: inherit;
+      }
+      .game-name{
+        color: rgb(92,92,125);
+      }
+      .game-info{
+        display: block;
+      }
+      .search-heading{
+        margin:0;
+        font-style: italic;
+        font-weight: 300;
+      }
+    </style>
+    <iron-ajax auto
+        id="game-data"
+        url="http://localhost:3000/games"
+        params='{{searchParams}}'
+        handle-as="json"
+        last-response="{{gameData}}"></iron-ajax>
+    <h1><span class="game-name">{{gameData.name}}</span></h1>
+
+    <div class="game-info">
+      <paper-material elevation="3">
+        <img src="{{gameData.image.screen_url}}" class="game-image"/>
+      </paper-material>
+      <paper-material elevation="1" class="description paper-font-body2">
+        <p>{{gameData.deck}}</p>
+      </paper-material>
+      <paper-material elevation="1" class="game-name red paper-font-body2">
+        <p>
+          <span>Expected Release :</span>
+          <span>{{gameData.expected_release_year}}</span>
+          <span>{{gameData.expected_release_month}}</span>
+          <span>{{gameData.expected_release_day}}</span>
+        </p>
+        <paper-ripple center></paper-ripple>
+      </paper-material>
+      <paper-material elevation="1" class="platforms paper-font-body2">
+        <p><span class="content">{{gameData.platforms.0.name}}</span></p>
+        <paper-ripple center></paper-ripple>
+      </paper-material>
+      <paper-material elevation="1" class="paper-font-body2">
+        <p>Originial Release Date <span>{{gameData.original_release_date}}</span></p>
+        <paper-ripple center></paper-ripple>
+      </paper-material>
+      <br />
+      <paper-input class="search" value="{{gameName::change}}"></paper-input>
+      <paper-button raised class="search" on-click="gameSearch">Search</paper-button>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'video-game',
+      properties: {
+        gameName: {
+          type: String,
+          value: "Halo 5",
+          notify: true
+        },
+        searchParams: {
+          type: Object,
+          value: function() {
+            return {
+              "search": "Halo 5"
+            };
+          },
+          notify: true
+        }
+      },
+      gameSearch: function() {
+        this.searchParams = {
+          "search": this.gameName
+        };
+      }
+    });
+  })();
+  </script>
+</dom-module>

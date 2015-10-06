@@ -1,0 +1,17 @@
+{
+  "name": "video-game-search-component",
+  "version": "0.0.1",
+  "authors": [
+    "Paul Beauchamp <paulb896@gmail.com>"
+  ],
+  "description": "Search for video games",
+  "main": "video-game.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "polymer": "~1.1.4",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.1"
+  }
+}

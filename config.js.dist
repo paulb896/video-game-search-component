@@ -1,0 +1,15 @@
+/**
+ * Example configs for GiantBomb API
+ *  http://www.giantbomb.com/api/ for more info
+ *
+ * @exports node.js module
+ */
+var config = {
+  serverPort: 3000,
+  baseUrl: 'http://www.giantbomb.com/api/search?format=json&resources=game&expected_release_year=2015&limit=1',
+  apiQueryParam: 'query',
+  apiKeyName: 'api_key',
+  apiKey: '123456789...' // SET THIS HERE
+};
+
+module.exports = config;
